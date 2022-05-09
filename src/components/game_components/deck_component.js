@@ -13,7 +13,6 @@ export default function Deck_component(props) {
       return item.id === id;
     });
     if (gameData.gameOver === 'no') {
-      props.click(!props.clickEvent);
       if (gameData.mainDeck.length === 0) {
         props.message('There are no more cards in the deck..Shuffled');
         setTimeout(() => {
@@ -53,7 +52,9 @@ export default function Deck_component(props) {
           props.message(null);
         }, 1000);
       }
-      props.click(!props.clickEvent);
+      props.setClickEvent((x) => {
+        return !x;
+      });
     }
   }
   return (

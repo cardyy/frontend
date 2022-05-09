@@ -29,7 +29,6 @@ export default function Game_component() {
     hadDeclared,
     setHadDeclared,
     setClickEvent,
-    clickEvent,
   } = UseFetch();
 
   if (roomId && hasData) {
@@ -42,8 +41,7 @@ export default function Game_component() {
           data={gameData}
           socket={socketRef}
           next={setNext}
-          click={setClickEvent}
-          clickEvent={clickEvent}
+          setClickEvent={setClickEvent}
         />
         <Cards
           myHand={myHand}
@@ -52,30 +50,23 @@ export default function Game_component() {
           socket={socketRef}
           next={setNext}
           setHadDeclared={setHadDeclared}
-          click={setClickEvent}
-          clickEvent={clickEvent}
+          setClickEvent={setClickEvent}
         />
-        <DeclaredSuite
-          declare={gameData.declare}
-          click={setClickEvent}
-          clickEvent={clickEvent}
-        />
+        <DeclaredSuite declare={gameData.declare} />
         {hadDeclared && (
           <Declare
             hadDeclared={hadDeclared}
             setHadDeclared={setHadDeclared}
             socket={socketRef}
             message={setMessage}
-            click={setClickEvent}
-            clickEvent={clickEvent}
+            setClickEvent={setClickEvent}
           />
         )}
         {next && (
           <Next
             socket={socketRef}
             next={setNext}
-            click={setClickEvent}
-            clickEvent={clickEvent}
+            setClickEvent={setClickEvent}
           />
         )}
         <span className='room-message'>{message}</span>

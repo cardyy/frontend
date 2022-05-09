@@ -12,7 +12,9 @@ export default function Declare(props) {
     };
     props.socket.current.emit('declare', deaclareCredentials);
     props.message(null);
-    props.click(!props.clickEvent);
+    props.setClickEvent((x) => {
+      return !x;
+    });
   };
   const cards = ['C', 'D', 'H', 'S'];
   return (

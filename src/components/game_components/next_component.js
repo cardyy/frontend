@@ -10,7 +10,9 @@ export default function Next_component(props) {
     };
     props.socket.current.emit('next', credentials);
     props.next(false);
-    props.click(!props.clickEvent);
+    props.setClickEvent((x) => {
+      return !x;
+    });
   };
   return (
     <div>

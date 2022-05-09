@@ -186,8 +186,10 @@ export default function Cards_component(props) {
           props.message(null);
         }, 1000);
       }
+      props.setClickEvent((x) => {
+        return !x;
+      });
     }
-    props.click(!props.clickEvent);
   };
   return (
     <div className='footer'>

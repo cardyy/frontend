@@ -24,8 +24,10 @@ export default function UseFetch() {
     if (myID) return;
     localStorage.setItem('myId', id);
     localStorage.setItem('roomId', room);
-    setClickEvent(!clickEvent);
     socketRef.current.emit('create_game', { room, id });
+    setClickEvent((x) => {
+      return !x;
+    });
   };
 
   const joinRoom = () => {
@@ -35,7 +37,9 @@ export default function UseFetch() {
     socketRef.current.emit('join_game', { room, id });
     localStorage.setItem('myId', id);
     localStorage.setItem('roomId', room);
-    setClickEvent(!clickEvent);
+    setClickEvent((x) => {
+      return !x;
+    });
   };
 
   const leaveRoom = () => {
@@ -43,29 +47,34 @@ export default function UseFetch() {
     const id = localStorage.getItem('myId');
     socketRef.current.emit('leave_room', { room, id });
     localStorage.clear();
-    setClickEvent(!clickEvent);
+    setClickEvent((x) => {
+      return !x;
+    });
   };
 
   useEffect(() => {
-    setRoomId(localStorage.getItem('roomId'));
-    setmyID(localStorage.getItem('myId'));
-  }, [clickEvent]);
-
-  useEffect(() => {
     socketRef.current = io.connect('/');
-    !gameStarted && setMessage('Waiting for other players to join...');
     const id = localStorage.getItem('myId');
     const room = localStorage.getItem('roomId');
-    if (!room) return;
-    socketRef.current.emit('server_connect', room);
+    setRoomId(room);
+    setmyID(id);
+    !gameStarted && setMessage('Waiting for other players to join...');
 
-    socketRef.current.on(`${room}`, (gameData) => {
-      const data = JSON.parse(gameData);
-      if (data == null || data.players.find((x) => x.id === id) === undefined) {
+    if (!roomId) return;
+    socketRef.current.emit('server_connect', roomId);
+
+    socketRef.current.on(`${roomId}`, (gameData) => {
+      const data = gameData;
+      if (
+        data == null ||
+        data.players.find((x) => x.id === myID) === undefined
+      ) {
         localStorage.clear();
       } else {
         data.players.length > 0 ? setGameStarted(true) : setGameStarted(false);
-        const myPersonalData = data.players.find((player) => player.id === id);
+        const myPersonalData = data.players.find(
+          (player) => player.id === myID
+        );
         if (myPersonalData) {
           if (myPersonalData.nhonga !== 0) {
             setMessage(
@@ -82,17 +91,22 @@ export default function UseFetch() {
               setMessage(null);
             }, 3000);
             myVar = setTimeout(async () => {
-              socketRef.current.emit('next', { room, id });
+              socketRef.current.emit('next', { roomId, myID });
             }, 3000);
             if (myPersonalData.skip === 'no') {
               clearTimeout(myVar);
             }
           }
+
           if (data.gameOver === 'yes') {
             setMessage('Game Over');
+            setTimeout(() => {
+              setMessage(null);
+            }, 10000);
           }
+          setMyHand(myPersonalData.playerHand);
         }
-        setMyHand(myPersonalData.playerHand);
+
         setActivePlayer(data.activePlayer);
         setActivePlayers(
           data.players.map((x) => {
@@ -106,8 +120,11 @@ export default function UseFetch() {
       }
     });
 
-    return () => socketRef.current.emit('leave-game', { roomId, id });
-  }, [roomId, gameStarted, myID, clickEvent]);
+    return () => {
+      socketRef.current.disconnect();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(gameData), clickEvent, roomId]);
 
   return {
     hasData,
