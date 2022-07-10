@@ -103,7 +103,7 @@ export default function Game_component() {
               {game_type === 'rest of world' && (
                 <div className='modal-container'>
                   <span>
-                    <p>Choose number of players</p>
+                    <h4>Choose number of players to begin game.</h4>
                   </span>
                   <div className='num-players'>
                     <div>
