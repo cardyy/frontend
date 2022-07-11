@@ -6,6 +6,7 @@ export default function UseFetch() {
   const [myID, setmyID] = useState(null);
   const [gameData, setGameData] = useState([]);
   const [activePlayers, setActivePlayers] = useState([]);
+  const [numPlayers, setNumPlayers] = useState(0);
   const [activePlayer, setActivePlayer] = useState('');
   const [gameStarted, setGameStarted] = useState(true);
   const [centerDeck, setCenterDeck] = useState([]);
@@ -18,21 +19,21 @@ export default function UseFetch() {
   const [hadDeclared, setHadDeclared] = useState(false);
   const socketRef = useRef();
 
-  const createRoom = () => {
-    const id = Math.random().toString(36).substr(2, 9);
-    const room = '4';
+  const createRoom = (num_players, game_type) => {
+    const id = Math.random().toString(36).substr(2, 4);
+    const room = game_type + id;
     if (myID) return;
     localStorage.setItem('myId', id);
     localStorage.setItem('roomId', room);
-    socketRef.current.emit('create_game', { room, id });
+    socketRef.current.emit('create_game', { room, id, num_players });
     setClickEvent((x) => {
       return !x;
     });
   };
 
-  const joinRoom = () => {
-    const id = Math.random().toString(36).substr(2, 9);
-    const room = '4';
+  const joinRoom = (x) => {
+    const id = Math.random().toString(36).substr(2, 4);
+    const room = x;
     if (myID) return;
     socketRef.current.emit('join_game', { room, id });
     localStorage.setItem('myId', id);
@@ -117,6 +118,7 @@ export default function UseFetch() {
         setHasData(data.length !== 0);
         setDeck(data.mainDeck.length);
         setGameData(data);
+        setNumPlayers(data.playersAllowed);
       }
     });
 
@@ -136,7 +138,7 @@ export default function UseFetch() {
     leaveRoom,
     myHand,
     activePlayer,
-    activePlayers,
+    numPlayers,
     centerDeck,
     deck,
     socketRef,

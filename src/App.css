@@ -79,7 +79,6 @@ video {
   left: 60%;
   top: 16rem;
   transition: width 2s height 2s;
-  filter: drop-shadow(0px 5px 3px black);
 }
 .deck:hover {
   width: 12.6rem;
@@ -107,7 +106,7 @@ video {
 .declare-cards {
   width: 4rem;
   height: 4rem;
-  filter: drop-shadow(0px 5px 3px black);
+
   cursor: pointer;
 }
 
@@ -123,7 +122,6 @@ video {
   top: 10rem;
   width: 4rem;
   height: 4rem;
-  filter: drop-shadow(0px 5px 3px black);
 }
 
 .next {
@@ -163,7 +161,6 @@ video {
 .hand {
   width: 100%;
   height: 225px;
-  filter: drop-shadow(0px 5px 3px black);
 }
 .hand > li {
   position: absolute;
@@ -307,7 +304,7 @@ video {
   position: absolute;
   top: 0;
   right: 0;
-  width: 30rem;
+  width: 50rem;
   height: 2rem;
   display: flex;
   flex-direction: row;
@@ -316,29 +313,12 @@ video {
 }
 
 span {
-  color: white;
+  color: #aaaaaa;
   font-size: 0.8rem;
   font-family: 'Roboto', sans-serif;
 }
 
 button {
-  background-color: #573392;
-  display: inline-block;
-  padding: 0.3em 1.2em;
-  width: 14rem;
-  height: 2.5rem;
-  margin: 0 0.1em 0.1em 0;
-  border: 0.16em solid rgba(255, 255, 255, 0);
-  border-radius: 2em;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  color: #ffffff;
-  text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-  text-align: center;
-  transition: all 0.2s;
-  filter: drop-shadow(0px 5px 3px black);
   cursor: pointer;
 }
 
@@ -353,7 +333,6 @@ button {
 
 .w3-modal {
   z-index: 3;
-  display: none;
   padding-top: 12rem;
   position: fixed;
   left: 0;
@@ -361,6 +340,19 @@ button {
   width: 100%;
   height: 100%;
   overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.w3-modal2 {
+  z-index: 3;
+  padding-top: 5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 110%;
+  overflow: hidden;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -378,22 +370,35 @@ button {
 }
 .w3-modal-content {
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   position: relative;
   padding: 0;
   outline: 0;
   width: 22rem;
   height: 10rem;
   border-radius: 2rem;
-  filter: drop-shadow(0px 5px 3px black);
 }
+
+.w3-modal-content2 {
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: relative;
+  padding: 0;
+  outline: 0;
+  width: 28rem;
+  height: 32rem;
+  border-radius: 2rem;
+}
+
 .w3-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .w3-container p {
-  color: white;
+  color: #aaaaaa;
+  font-size: 0.85rem;
+  font-weight: 300;
   margin-bottom: 2.5rem;
 }
 
@@ -427,14 +432,23 @@ button {
   align-items: center;
   width: 18rem;
 }
-
+.small {
+  width: 10rem;
+}
 .num-players div {
   width: 5rem;
   display: flex;
   flex-direction: column;
   box-align: center;
   align-items: center;
-  margin-top: 1.5rem;
+}
+.w3-button {
+  color: #aaaaaa;
+  font-weight: 500;
+}
+.num-players div img:hover {
+  width: 3.5rem;
+  cursor: pointer;
 }
 
 .num-players div p {
@@ -451,13 +465,68 @@ button {
   align-items: center;
 }
 
+.card-lnading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 2rem;
+  padding: 1rem;
+  color: #aaaaaa;
+  border-bottom: 0.2px solid #414040;
+}
+
+.card-lnading button {
+  width: 6rem;
+  height: 2rem;
+  border-radius: 2em;
+  font-size: 0.7em;
+  color: #aaaaaa;
+  text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+  text-align: center;
+  transition: all 0.2s;
+}
+span h4 {
+  color: #aaaaaa;
+}
+.join-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.join-input input {
+  padding: 0.3em 1.2em;
+  width: 14rem;
+  height: 2.5rem;
+  margin: 0 0.1em 0.1em 0;
+  border: 0.16em solid rgba(255, 255, 255, 0);
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.join-input input,
+.join-input button {
+  margin-top: 2rem;
+}
+
+.button-link {
+  margin-top: 2.5rem;
+}
 @media all and (max-width: 30em) {
   button {
     display: block;
     margin: 0.2em auto;
   }
 }
-
+p {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
 @keyframes glow {
   from {
     box-shadow: 0 0 green;
@@ -466,5 +535,82 @@ button {
   to {
     box-shadow: 0 0 10px 8px transparent;
     border-width: 2px;
+  }
+}
+
+.glow-on-hover {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #aaaaaa;
+  background: rgba(122, 0, 255, 0.35);
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.35),
+    rgba(255, 115, 0, 0.35),
+    rgba(255, 251, 0, 0.35),
+    rgba(73, 255, 0, 0.35),
+    rgba(0, 255, 213, 0.35),
+    rgba(0, 43, 255, 0.35),
+    rgba(0, 0, 0, 0.35),
+    rgba(255, 0, 200, 0.35),
+    rgba(255, 0, 0, 0.35)
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.15);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
   }
 }
