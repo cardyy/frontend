@@ -6,6 +6,7 @@ export default function UseFetch() {
   const [myID, setmyID] = useState(null);
   const [gameData, setGameData] = useState([]);
   const [activePlayers, setActivePlayers] = useState([]);
+  const [rest, setRest] = useState([]);
   const [numPlayers, setNumPlayers] = useState(0);
   const [activePlayer, setActivePlayer] = useState('');
   const [gameStarted, setGameStarted] = useState(true);
@@ -60,10 +61,11 @@ export default function UseFetch() {
     setRoomId(room);
     setmyID(id);
     !gameStarted && setMessage('Waiting for other players to join...');
-
-    if (!roomId) return;
     socketRef.current.emit('server_connect', roomId);
-
+    socketRef.current.on('rest-of-world', (rest_of_world) => {
+      setRest(rest_of_world);
+    });
+    if (!roomId) return;
     socketRef.current.on(`${roomId}`, (gameData) => {
       const data = gameData;
       if (
@@ -145,6 +147,7 @@ export default function UseFetch() {
     gameData,
     setMessage,
     setNext,
+    rest,
     next,
     hadDeclared,
     setHadDeclared,

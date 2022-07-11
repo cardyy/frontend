@@ -23,6 +23,7 @@ export default function Game_component() {
     centerDeck,
     deck,
     setMessage,
+    rest,
     gameData,
     socketRef,
     setNext,
@@ -82,7 +83,12 @@ export default function Game_component() {
   } else {
     return (
       <div className='home'>
-        <LandingPage joinRoom={joinRoom} createRoom={createRoom} />
+        <LandingPage
+          joinRoom={joinRoom}
+          createRoom={createRoom}
+          setClickEvent={setClickEvent}
+          socket={rest}
+        />
       </div>
     );
   }
