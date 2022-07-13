@@ -65,6 +65,7 @@ export default function UseFetch() {
     socketRef.current.on('rest-of-world', (rest_of_world) => {
       setRest(rest_of_world);
     });
+
     if (!roomId) return;
     socketRef.current.on(`${roomId}`, (gameData) => {
       const data = gameData;
@@ -139,6 +140,7 @@ export default function UseFetch() {
     message,
     leaveRoom,
     myHand,
+    activePlayers,
     activePlayer,
     numPlayers,
     centerDeck,

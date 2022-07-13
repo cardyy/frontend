@@ -20,6 +20,7 @@ export default function Game_component() {
     myHand,
     numPlayers,
     activePlayer,
+    activePlayers,
     centerDeck,
     deck,
     setMessage,
@@ -42,6 +43,7 @@ export default function Game_component() {
           deck={deck}
           room={roomId}
           numPlayers={numPlayers}
+          activePlayers={activePlayers.length}
         />
         <CenterCards centerCards={centerDeck} />
         <Deck

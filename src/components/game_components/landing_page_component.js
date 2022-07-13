@@ -44,6 +44,21 @@ export default function LandingPage(props) {
     });
   };
 
+  const handleJoin = (game) => {
+    if (game.players.length === game.playersAllowed) {
+      alert(
+        'Sorry the number of required players for this game has been reached'
+      );
+      return;
+    }
+    props.joinRoom(game.id);
+  };
+
+  const handleJoin2 = (input) => {
+    props.joinRoom(input);
+    setInput('');
+  };
+
   return (
     <>
       <img src={require('../../assets/text.png')} alt='' width='130rem' />
@@ -65,10 +80,8 @@ export default function LandingPage(props) {
                   </p>
                   <button
                     className='glow-on-hover'
-                    onClick={() => {
-                      props.joinRoom(game.id);
-                    }}>
-                    Enter game
+                    onClick={() => handleJoin(game)}>
+                    Join game
                   </button>
                 </div>
               ))}
@@ -176,11 +189,8 @@ export default function LandingPage(props) {
                 />
                 <button
                   className='glow-on-hover'
-                  onClick={() => {
-                    props.joinRoom(input);
-                    setInput('');
-                  }}>
-                  Enter game
+                  onClick={() => handleJoin2(input)}>
+                  Join game
                 </button>
               </div>
             </div>

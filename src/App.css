@@ -501,17 +501,20 @@ span h4 {
   height: 2.5rem;
   margin: 0 0.1em 0.1em 0;
   border: 0.16em solid rgba(255, 255, 255, 0);
-  border-radius: 2em;
+  border-radius: 10px;
   box-sizing: border-box;
   text-decoration: none;
   font-family: 'Roboto', sans-serif;
   text-align: center;
   transition: all 0.2s;
 }
+#code-input {
+  margin-top: 2em;
+}
 
 .join-input input,
 .join-input button {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .button-link {
