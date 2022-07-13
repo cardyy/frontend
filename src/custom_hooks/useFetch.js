@@ -36,7 +36,17 @@ export default function UseFetch() {
     const id = Math.random().toString(36).substr(2, 4);
     const room = x;
     if (myID) return;
-    socketRef.current.emit('join_game', { room, id });
+    let myPromise = new Promise((myResolve) => {
+      socketRef.current.emit('join_game', { room, id });
+      myResolve();
+    });
+
+    myPromise.then(() => {
+      socketRef.current.on(`${id}`, (msg) => {
+        alert(msg);
+      });
+    });
+
     localStorage.setItem('myId', id);
     localStorage.setItem('roomId', room);
     setClickEvent((x) => {
