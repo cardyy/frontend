@@ -1,4 +1,5 @@
 import React from 'react';
+import './cards_component.css';
 
 export default function Cards_component(props) {
   const handleClick = (a) => {
@@ -195,7 +196,7 @@ export default function Cards_component(props) {
     <div className='footer'>
       {props.myHand.map((card, index) => (
         <img
-          src={require(`../../assets/cards/${card}.png`)}
+          src={require(`../../../assets/cards/${card}.png`)}
           alt=''
           key={index}
           className='card img'

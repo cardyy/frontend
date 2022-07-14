@@ -1,4 +1,5 @@
 import React from 'react';
+import './deck.css';
 
 export default function Deck_component(props) {
   function handleClick() {
@@ -60,7 +61,7 @@ export default function Deck_component(props) {
   return (
     <div>
       <img
-        src={require('../../assets/deck.png')}
+        src={require('../../../assets/deck.png')}
         alt=''
         onClick={handleClick}
         className='deck'

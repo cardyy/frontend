@@ -1,4 +1,5 @@
 import React from 'react';
+import './center_cards.css';
 
 export default function Center_cards_component(props) {
   return (
@@ -8,7 +9,7 @@ export default function Center_cards_component(props) {
           {props.centerCards.map((card, index) => (
             <li key={index}>
               <img
-                src={require(`../../assets/cards/${card}.png`)}
+                src={require(`../../../assets/cards/${card}.png`)}
                 alt=''
                 className='img'
               />

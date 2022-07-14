@@ -1,4 +1,5 @@
 import React from 'react';
+import './declare.css';
 
 export default function Declare(props) {
   const handleClick = (a) => {
@@ -21,7 +22,7 @@ export default function Declare(props) {
     <div className='declare'>
       {cards.map((card, index) => (
         <img
-          src={require(`../../assets/${card}.png`)}
+          src={require(`../../../assets/${card}.png`)}
           alt=''
           key={index}
           className='declare-cards'

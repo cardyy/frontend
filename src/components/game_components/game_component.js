@@ -1,15 +1,15 @@
 import React from 'react';
 import Players from './players_component';
-import Cards from './cards_component';
-import CenterCards from './center_cards_component';
-import Deck from './deck_component';
+import Cards from './cards_component/cards_component';
+import CenterCards from './center_cards_component/center_cards_component';
+import Deck from './deck_component/deck_component';
 import Next from './next_component';
 import NavBar from './nav_bar';
-import Declare from './declare';
-import DeclaredSuite from './declared_suit';
+import Declare from './declare/declare';
+import DeclaredSuite from './declare/declared_suit';
 import UseFetch from '../../custom_hooks/useFetch';
-import LandingPage from './landing_page_component';
-import GameOver from './gameOver/gameOver.component';
+import LandingPage from './landing_page/landing_page_component';
+import GameOver from './game_over_component/game_over.component';
 
 export default function Game_component() {
   const {

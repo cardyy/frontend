@@ -1,5 +1,5 @@
 import React from 'react';
-import './gameOver.css';
+import './game_over.css';
 
 export default function GameOver() {
   const handleButtonClick = () => {

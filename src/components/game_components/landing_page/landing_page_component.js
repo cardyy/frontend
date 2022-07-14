@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './landing_page.css';
 
 export default function LandingPage(props) {
   const [game_type, setGame_type] = useState(null);
@@ -61,7 +62,7 @@ export default function LandingPage(props) {
 
   return (
     <>
-      <img src={require('../../assets/text.png')} alt='' width='130rem' />
+      <img src={require('../../../assets/text.png')} alt='' width='130rem' />
       {game_type === 'r' && button_action === 'j' && (
         <div id='id02' className='w3-modal2' onClick={() => handleClose()}>
           <div className='w3-modal-content2 '>
@@ -69,7 +70,7 @@ export default function LandingPage(props) {
               data.map((game) => (
                 <div className='card-lnading' key={game.id}>
                   <img
-                    src={require('../../assets/push.png')}
+                    src={require('../../../assets/push.png')}
                     alt=''
                     width='50rem'
                     height='50rem'
@@ -118,7 +119,7 @@ export default function LandingPage(props) {
                 <div className='num-players'>
                   <div onClick={() => props.createRoom(2, game_type)}>
                     <img
-                      src={require('../../assets/two.png')}
+                      src={require('../../../assets/two.png')}
                       alt=''
                       width='50rem'
                       height='40rem'
@@ -127,7 +128,7 @@ export default function LandingPage(props) {
                   </div>
                   <div onClick={() => props.createRoom(3, game_type)}>
                     <img
-                      src={require('../../assets/three.png')}
+                      src={require('../../../assets/three.png')}
                       alt=''
                       width='50rem'
                       height='40rem'
@@ -136,7 +137,7 @@ export default function LandingPage(props) {
                   </div>
                   <div onClick={() => props.createRoom(4, game_type)}>
                     <img
-                      src={require('../../assets/four.png')}
+                      src={require('../../../assets/four.png')}
                       alt=''
                       width='50rem'
                       height='40rem'
