@@ -9,6 +9,7 @@ import Declare from './declare';
 import DeclaredSuite from './declared_suit';
 import UseFetch from '../../custom_hooks/useFetch';
 import LandingPage from './landing_page_component';
+import GameOver from './gameOver/gameOver.component';
 
 export default function Game_component() {
   const {
@@ -45,6 +46,7 @@ export default function Game_component() {
           numPlayers={numPlayers}
           activePlayers={activePlayers.length}
         />
+        {gameData.gameOver === 'yes' && <GameOver />}
         <CenterCards centerCards={centerDeck} />
         <Deck
           message={setMessage}

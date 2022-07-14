@@ -112,12 +112,6 @@ export default function UseFetch() {
             }
           }
 
-          if (data.gameOver === 'yes') {
-            setMessage('Game Over');
-            setTimeout(() => {
-              setMessage(null);
-            }, 10000);
-          }
           setMyHand(myPersonalData.playerHand);
         }
 
