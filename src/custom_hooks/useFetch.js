@@ -12,6 +12,7 @@ export default function UseFetch() {
   const [gameStarted, setGameStarted] = useState(true);
   const [centerDeck, setCenterDeck] = useState([]);
   const [message, setMessage] = useState('');
+  const [show_gameOver_buttons, setShow_gameOver_buttons] = useState(false);
   const [clickEvent, setClickEvent] = useState(false);
   const [hasData, setHasData] = useState(0);
   const [myHand, setMyHand] = useState([]);
@@ -57,6 +58,8 @@ export default function UseFetch() {
   const leaveRoom = () => {
     const room = localStorage.getItem('roomId');
     const id = localStorage.getItem('myId');
+    localStorage.removeItem('game_type');
+    localStorage.removeItem('button_action');
     socketRef.current.emit('leave_room', { room, id });
     localStorage.clear();
     setClickEvent((x) => {
@@ -77,6 +80,10 @@ export default function UseFetch() {
     });
 
     if (!roomId) return;
+
+    socketRef.current.on(`a${roomId}`, (msg) => {
+      setShow_gameOver_buttons(msg);
+    });
     socketRef.current.on(`${roomId}`, (gameData) => {
       const data = gameData;
       if (
@@ -159,5 +166,6 @@ export default function UseFetch() {
     setHadDeclared,
     setClickEvent,
     clickEvent,
+    show_gameOver_buttons,
   };
 }

@@ -34,6 +34,7 @@ export default function Game_component() {
     hadDeclared,
     setHadDeclared,
     setClickEvent,
+    show_gameOver_buttons,
   } = UseFetch();
 
   if (roomId && hasData) {
@@ -46,7 +47,12 @@ export default function Game_component() {
           numPlayers={numPlayers}
           activePlayers={activePlayers.length}
         />
-        {gameData.gameOver === 'yes' && <GameOver />}
+        {gameData.gameOver === 'yes' && (
+          <GameOver
+            show_gameOver_buttons={show_gameOver_buttons}
+            GameOver={gameData.gameOver}
+          />
+        )}
         <CenterCards centerCards={centerDeck} />
         <Deck
           message={setMessage}
