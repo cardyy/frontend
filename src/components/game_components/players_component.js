@@ -18,6 +18,7 @@ const Video = (props) => {
       ref={ref}
       autoPlay
       className={`avators ${props.glow}`}
+      id={`${props.pos}`}
     />
   );
 };
@@ -34,6 +35,16 @@ const Players_component = (props) => {
       return 'glow';
     }
   };
+
+  useEffect(() => {
+    for (let i = 0; i <= peers.length; i++) {
+      document.getElementById(`${i}${i}`).style.position = 'absolute';
+      document.getElementById(`${i}${i}`).style.left =
+        document.getElementById(`${i}`).offsetLeft + 'px';
+      document.getElementById(`${i}${i}`).style.top =
+        document.getElementById(`${i}`).offsetTop + 'px';
+    }
+  }, []);
 
   useEffect(() => {
     socketRef.current = io.connect('https://server-zw.herokuapp.com/');
@@ -70,7 +81,7 @@ const Players_component = (props) => {
           item.peer.signal(payload.signal);
         });
       });
-    console.log(peers);
+
     return () => {
       socketRef.current.emit('disconnect', id);
     };
@@ -137,11 +148,22 @@ const Players_component = (props) => {
         muted
         ref={userVideo}
         autoPlay
-        className={`avators ${glow(id)}`}
+        className='avators av-top'
+        id='0'
       />
       {peers.map((peer, index) => {
-        return <Video key={index} peer={peer} glow={glow(id)} />;
+        return (
+          <Video
+            key={index}
+            peer={peer}
+            glow={glow(id)}
+            pos={() => {
+              return index + 1;
+            }}
+          />
+        );
       })}
+      <div className='glow av-bot ' id='00'></div>
     </div>
   );
 };

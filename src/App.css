@@ -124,6 +124,18 @@ span h4 {
 .button-link {
   margin-top: 2.5rem;
 }
+
+.av-top {
+  z-index: 10;
+}
+
+.av-bot {
+  z-index: 1;
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+  display: block;
+}
 @media all and (max-width: 30em) {
   button {
     display: block;
@@ -136,7 +148,7 @@ p {
 }
 @keyframes glow {
   from {
-    box-shadow: 0 0 green;
+    box-shadow: 0 0 rgba(122, 0, 255, 1);
   }
 
   to {
