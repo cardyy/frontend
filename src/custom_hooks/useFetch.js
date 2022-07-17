@@ -19,6 +19,7 @@ export default function UseFetch() {
   const [deck, setDeck] = useState(0);
   const [next, setNext] = useState(false);
   const [hadDeclared, setHadDeclared] = useState(false);
+
   const socketRef = useRef();
 
   const createRoom = (num_players, game_type) => {
