@@ -17,7 +17,7 @@ const Video = (props) => {
       muted
       ref={ref}
       autoPlay
-      className={`avators ${props.glow}`}
+      className='avators av-top'
       id={`${props.pos}`}
     />
   );
@@ -151,19 +151,25 @@ const Players_component = (props) => {
         className='avators av-top'
         id='0'
       />
+
       {peers.map((peer, index) => {
         return (
           <Video
             key={index}
             peer={peer}
-            glow={glow(id)}
             pos={() => {
               return index + 1;
             }}
           />
         );
       })}
-      <div className='glow av-bot ' id='00'></div>
+      {props.activePlayers.map((playerId, index) => (
+        <div
+          className={`glow av-bot ${glow(playerId)}`}
+          id={`${index + 1}${index + 1}`}
+          key={index}
+        />
+      ))}
     </div>
   );
 };
