@@ -18,7 +18,7 @@ const Video = (props) => {
       muted
       ref={ref}
       autoPlay
-      className={`avators ${props.glow(id)}`}
+      className={`avators ${props.glow}`}
     />
   );
 };

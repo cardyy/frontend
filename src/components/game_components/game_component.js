@@ -47,7 +47,7 @@ export default function Game_component() {
           numPlayers={numPlayers}
           activePlayers={activePlayers.length}
         />
-
+        <Players activePlayer={activePlayer} roomID={roomId} />
         {gameData.gameOver === 'yes' && (
           <GameOver
             show_gameOver_buttons={show_gameOver_buttons}
