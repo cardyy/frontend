@@ -42,7 +42,6 @@ const Players_component = (props) => {
         document.getElementById(`${i}`) === null
       )
         return;
-
       document.getElementById(`${i}${i}`).style.position = 'absolute';
       document.getElementById(`${i}${i}`).style.display = 'block';
       document.getElementById(`${i}${i}`).style.left =
@@ -50,7 +49,7 @@ const Players_component = (props) => {
       document.getElementById(`${i}${i}`).style.top =
         document.getElementById(`${i}`).offsetTop + 'px';
     }
-  }, [peers.length, props.activePlayers.length]);
+  }, []);
 
   useEffect(() => {
     socketRef.current = io.connect('https://server-zw.herokuapp.com/');
