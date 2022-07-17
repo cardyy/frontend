@@ -151,9 +151,13 @@ const Players_component = (props) => {
         id='0'
       />
 
-      {peers.map((peer, index) => {
-        return <Video key={peer.peerID} peer={peer.peer} pos={index + 1} />;
-      })}
+      {peers
+        .filter(
+          (v, i, a) => a.findLastIndex((v2) => v2.peerID === v.peerID) === i
+        )
+        .map((peer, index) => {
+          return <Video key={peer.peerID} peer={peer.peer} pos={index + 1} />;
+        })}
       {props.activePlayers.map((playerId, index) => (
         <div className={`av-bot glow`} id={`${index}${index}`} key={index} />
       ))}
