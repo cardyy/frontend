@@ -161,7 +161,7 @@ const Players_component = (props) => {
       {props.activePlayers.map((playerId, index) => (
         <div
           className={`glow av-bot ${glow(playerId)}`}
-          id={`${index + 1}${index + 1}`}
+          id={`${index}${index}`}
           key={index}
         />
       ))}
