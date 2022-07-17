@@ -113,8 +113,8 @@ const Players_component = (props) => {
           { url: 'stun:stun.crazyeights.io:5349' },
           {
             url: 'turn:turn.crazyeights.io:5349',
-            username: 'CARDYY@GMAIL.COM',
-            credential: 'SPOON@1989',
+            username: 'cardyy',
+            credential: 'spoon1989',
           },
         ],
       },
