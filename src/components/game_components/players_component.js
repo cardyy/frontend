@@ -44,6 +44,7 @@ const Players_component = (props) => {
         return;
 
       document.getElementById(`${i}${i}`).style.position = 'absolute';
+      document.getElementById(`${i}${i}`).style.display = 'block';
       document.getElementById(`${i}${i}`).style.left =
         document.getElementById(`${i}`).offsetLeft + 'px';
       document.getElementById(`${i}${i}`).style.top =

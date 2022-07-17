@@ -134,7 +134,7 @@ span h4 {
   height: 7rem;
   width: 7rem;
   border-radius: 50%;
-  display: block;
+  display: none;
 }
 @media all and (max-width: 30em) {
   button {
