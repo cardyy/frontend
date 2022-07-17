@@ -66,7 +66,10 @@ const Players_component = (props) => {
               peerID: userID,
               peer,
             });
-            peers.push(peer);
+            peers.push({
+              peerID: userID,
+              peer,
+            });
           });
           setPeers(peers);
         });
@@ -78,12 +81,27 @@ const Players_component = (props) => {
             peer,
           });
 
-          setPeers((users) => [...users, peer]);
+          const peerObj = {
+            peer,
+            peerID: payload.callerID,
+          };
+
+          setPeers((users) => [...users, peerObj]);
         });
 
         socketRef.current.on('receiving returned signal', (payload) => {
           const item = peersRef.current.find((p) => p.peerID === payload.id);
           item.peer.signal(payload.signal);
+        });
+
+        socketRef.current.on('user left', (id) => {
+          const peerObj = peersRef.current.find((p) => p.peerID === id);
+          if (peerObj) {
+            peerObj.peer.destroy();
+          }
+          const peers = peersRef.current.filter((p) => p.peerID !== id);
+          peersRef.current = peers;
+          setPeers(peers);
         });
       });
 
@@ -138,7 +156,7 @@ const Players_component = (props) => {
       />
 
       {peers.map((peer, index) => {
-        return <Video key={index} peer={peer} pos={index + 1} />;
+        return <Video key={peer.peerID} peer={peer.peer} pos={index + 1} />;
       })}
       {props.activePlayers.map((playerId, index) => (
         <div className={`av-bot glow`} id={`${index}${index}`} key={index} />
