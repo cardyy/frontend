@@ -43,7 +43,7 @@ const Players_component = (props) => {
       document.getElementById(`${i}${i}`).style.top =
         document.getElementById(`${i}`).offsetTop + 'px';
     }
-  }, []);
+  }, [peers.length]);
 
   useEffect(() => {
     socketRef.current = io.connect('https://server-zw.herokuapp.com/');
@@ -80,11 +80,7 @@ const Players_component = (props) => {
           item.peer.signal(payload.signal);
         });
       });
-
-    return () => {
-      socketRef.current.emit('disconnect', id);
-    };
-  }, [roomID, id, peers]);
+  }, [roomID, peers]);
 
   function createPeer(userToSignal, callerID, stream) {
     const peer = new Peer({
