@@ -41,11 +41,11 @@ const Players_component = (props) => {
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         userVideo.current.srcObject = stream;
-        socketRef.current.emit('join room', { roomID, id });
+        socketRef.current.emit('join room', roomID);
         socketRef.current.on('all users', (users) => {
           const peers = [];
           users.forEach((userID) => {
-            const peer = createPeer(userID, id, stream);
+            const peer = createPeer(userID, socketRef.current.id, stream);
             peersRef.current.push({
               peerID: userID,
               peer,
