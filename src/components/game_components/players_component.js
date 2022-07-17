@@ -25,7 +25,6 @@ const Video = (props) => {
 
 const Players_component = (props) => {
   const [peers, setPeers] = useState([]);
-  const [id, setId] = useState(localStorage.getItem('myId'));
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
