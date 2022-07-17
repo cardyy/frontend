@@ -37,16 +37,17 @@ const Players_component = (props) => {
 
   useEffect(() => {
     for (let i = 0; i <= peers.length; i++) {
-      if (props.activePlayers.length < 1) return;
-      if (document.getElementById(`${i}`) !== null) {
-        document.getElementById(`${i}${i}`).style.position = 'absolute';
-        document.getElementById(`${i}${i}`).style.left =
-          document.getElementById(`${i}`).offsetLeft + 'px';
-        document.getElementById(`${i}${i}`).style.top =
-          document.getElementById(`${i}`).offsetTop + 'px';
-      } else {
-        document.getElementById(`${i}${i}`).style.display = 'none';
-      }
+      if (
+        props.activePlayers.length < 1 ||
+        document.getElementById(`${i}`) === null
+      )
+        return;
+
+      document.getElementById(`${i}${i}`).style.position = 'absolute';
+      document.getElementById(`${i}${i}`).style.left =
+        document.getElementById(`${i}`).offsetLeft + 'px';
+      document.getElementById(`${i}${i}`).style.top =
+        document.getElementById(`${i}`).offsetTop + 'px';
     }
   }, [peers.length, props.activePlayers.length]);
 
