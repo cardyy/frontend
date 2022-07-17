@@ -137,11 +137,7 @@ const Players_component = (props) => {
         return <Video key={index} peer={peer} pos={index + 1} />;
       })}
       {props.activePlayers.map((playerId, index) => (
-        <div
-          className={`av-bot ${glow(playerId)}`}
-          id={`${index}${index}`}
-          key={index}
-        />
+        <div className={`av-bot glow`} id={`${index}${index}`} key={index} />
       ))}
     </div>
   );
