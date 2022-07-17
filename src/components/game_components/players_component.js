@@ -37,11 +37,7 @@ const Players_component = (props) => {
 
   useEffect(() => {
     for (let i = 0; i <= peers.length; i++) {
-      if (
-        props.activePlayers.length < 1 ||
-        props.activePlayers.length !== peers.length - 1
-      )
-        return;
+      if (props.activePlayers.length < 1) return;
       document.getElementById(`${i}${i}`).style.position = 'absolute';
       document.getElementById(`${i}${i}`).style.left =
         document.getElementById(`${i}`).offsetLeft + 'px';
@@ -137,7 +133,7 @@ const Players_component = (props) => {
       })}
       {props.activePlayers.map((playerId, index) => (
         <div
-          className={`glow av-bot ${glow(playerId)}`}
+          className={`av-bot ${glow(playerId)}`}
           id={`${index}${index}`}
           key={index}
         />
