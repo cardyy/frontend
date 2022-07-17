@@ -37,13 +37,14 @@ const Players_component = (props) => {
 
   useEffect(() => {
     for (let i = 0; i <= peers.length; i++) {
+      if (props.activePlayers.length < 1) return;
       document.getElementById(`${i}${i}`).style.position = 'absolute';
       document.getElementById(`${i}${i}`).style.left =
         document.getElementById(`${i}`).offsetLeft + 'px';
       document.getElementById(`${i}${i}`).style.top =
         document.getElementById(`${i}`).offsetTop + 'px';
     }
-  }, [peers.length]);
+  }, [peers.length, props.activePlayers.length]);
 
   useEffect(() => {
     socketRef.current = io.connect('https://server-zw.herokuapp.com/');
@@ -80,7 +81,7 @@ const Players_component = (props) => {
           item.peer.signal(payload.signal);
         });
       });
-  }, [roomID, peers]);
+  }, []);
 
   function createPeer(userToSignal, callerID, stream) {
     const peer = new Peer({
