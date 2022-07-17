@@ -38,11 +38,15 @@ const Players_component = (props) => {
   useEffect(() => {
     for (let i = 0; i <= peers.length; i++) {
       if (props.activePlayers.length < 1) return;
-      document.getElementById(`${i}${i}`).style.position = 'absolute';
-      document.getElementById(`${i}${i}`).style.left =
-        document.getElementById(`${i}`).offsetLeft + 'px';
-      document.getElementById(`${i}${i}`).style.top =
-        document.getElementById(`${i}`).offsetTop + 'px';
+      if (document.getElementById(`${i}`) !== null) {
+        document.getElementById(`${i}${i}`).style.position = 'absolute';
+        document.getElementById(`${i}${i}`).style.left =
+          document.getElementById(`${i}`).offsetLeft + 'px';
+        document.getElementById(`${i}${i}`).style.top =
+          document.getElementById(`${i}`).offsetTop + 'px';
+      } else {
+        document.getElementById(`${i}${i}`).style.display = 'none';
+      }
     }
   }, [peers.length, props.activePlayers.length]);
 
