@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Peer from 'simple-peer';
 import io from 'socket.io-client';
-const id = localStorage.getItem('myId');
 
 const Video = (props) => {
   const ref = useRef();
@@ -25,6 +24,7 @@ const Video = (props) => {
 
 const Players_component = (props) => {
   const [peers, setPeers] = useState([]);
+  const [id, setId] = useState(localStorage.getItem('myId'));
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
