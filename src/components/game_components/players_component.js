@@ -96,10 +96,6 @@ const Players_component = (props) => {
           setPeers(peers);
         });
       });
-
-    return () => {
-      socketRef.current.disconnect();
-    };
   }, []);
 
   function createPeer(userToSignal, callerID, stream) {
