@@ -25,6 +25,7 @@ const Video = (props) => {
 
 const Players_component = (props) => {
   const [peers, setPeers] = useState([]);
+  const [id, setId] = useState(localStorage.getItem('myId'));
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
@@ -57,11 +58,11 @@ const Players_component = (props) => {
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         userVideo.current.srcObject = stream;
-        socketRef.current.emit('join room', roomID);
+        socketRef.current.emit('join room', { roomID, id });
         socketRef.current.on('all users', (users) => {
           const peers = [];
           users.forEach((userID) => {
-            const peer = createPeer(userID, socketRef.current.id, stream);
+            const peer = createPeer(userID, id, stream);
             peersRef.current.push({
               peerID: userID,
               peer,
@@ -86,6 +87,9 @@ const Players_component = (props) => {
           item.peer.signal(payload.signal);
         });
       });
+    return () => {
+      socketRef.current.emit('disconnect', id);
+    };
   }, []);
 
   function createPeer(userToSignal, callerID, stream) {
@@ -114,7 +118,7 @@ const Players_component = (props) => {
     });
 
     peer.on('signal', (signal) => {
-      socketRef.current.emit('returning signal', { signal, callerID });
+      socketRef.current.emit('returning signal', { signal, callerID, id });
     });
 
     peer.signal(incomingSignal);

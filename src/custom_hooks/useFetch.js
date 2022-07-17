@@ -137,9 +137,6 @@ export default function UseFetch() {
       }
     });
 
-    return () => {
-      socketRef.current.disconnect();
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(gameData), clickEvent, roomId]);
 
