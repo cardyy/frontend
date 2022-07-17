@@ -36,7 +36,7 @@ const Players_component = (props) => {
   };
 
   useEffect(() => {
-    socketRef.current = io.connect('/');
+    socketRef.current = io.connect('https://server-zw.herokuapp.com/');
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {

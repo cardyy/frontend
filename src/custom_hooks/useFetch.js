@@ -69,7 +69,7 @@ export default function UseFetch() {
   };
 
   useEffect(() => {
-    socketRef.current = io.connect('/');
+    socketRef.current = io.connect('https://server-zw.herokuapp.com/');
     const id = localStorage.getItem('myId');
     const room = localStorage.getItem('roomId');
     setRoomId(room);
