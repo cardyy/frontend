@@ -108,16 +108,6 @@ const Players_component = (props) => {
 
   function createPeer(userToSignal, callerID, stream) {
     const peer = new Peer({
-      config: {
-        iceServers: [
-          { url: 'stun:stun.crazyeights.io:5349' },
-          {
-            url: 'turn:turn.crazyeights.io:5349',
-            username: 'cardyy',
-            credential: 'spoon1989',
-          },
-        ],
-      },
       initiator: true,
       trickle: false,
       stream,
@@ -136,16 +126,6 @@ const Players_component = (props) => {
 
   function addPeer(incomingSignal, callerID, stream) {
     const peer = new Peer({
-      config: {
-        iceServers: [
-          { url: 'stun:stun.crazyeights.io:5349' },
-          {
-            url: 'turn:turn.crazyeights.io:5349',
-            username: 'CARDYY@GMAIL.COM',
-            credential: 'SPOON@1989',
-          },
-        ],
-      },
       initiator: false,
       trickle: false,
       stream,
