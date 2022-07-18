@@ -10,7 +10,7 @@ const Video = (props) => {
       ref.current.srcObject = stream;
     });
   }, [props.peer]);
-
+  console.log(props.pos);
   return (
     <video
       playsInline
@@ -156,7 +156,15 @@ const Players_component = (props) => {
           (v, i, a) => a.findLastIndex((v2) => v2.peerID === v.peerID) === i
         )
         .map((peer, index) => {
-          return <Video key={peer.peerID} peer={peer.peer} pos={index + 1} />;
+          return (
+            <Video
+              key={peer.peerID}
+              peer={peer.peer}
+              pos={() => {
+                return index + 1;
+              }}
+            />
+          );
         })}
       {props.activePlayers.map((playerId, index) => (
         <div className={`av-bot glow`} id={`${index}${index}`} key={index} />
