@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "homepage": "https://cardyy.github.io/frontend",
   "private": true,
-  "proxy": "https://server-zw.herokuapp.com",
+  "engines": {
+    "node": "16.x"
+  },  
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
