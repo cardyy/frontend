@@ -46,7 +46,7 @@ const Players_component = (props) => {
   }, []);
 
   useEffect(() => {
-    socketRef.current = io.connect('http://localhost:8000');
+    socketRef.current = io.connect('https://crazy-eights-f5fce4747505.herokuapp.com');
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
       .then((stream) => {
