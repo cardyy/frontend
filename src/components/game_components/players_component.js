@@ -8,18 +8,12 @@ const Video = (props) => {
   useEffect(() => {
     props.peer.on('stream', (stream) => {
       ref.current.srcObject = stream;
+      ref.current.play().catch(console.error); // Handling the case where autoplay was prevented.
     });
   }, [props.peer]);
-  console.log(props.pos);
+  
   return (
-    <video
-      playsInline
-      muted
-      ref={ref}
-      autoPlay
-      className='avators av-top'
-      id={`${props.pos}`}
-    />
+    <video playsInline ref={ref} autoPlay className='avators av-top' id={`${props.pos}`} />
   );
 };
 
@@ -52,16 +46,19 @@ const Players_component = (props) => {
   }, []);
 
   useEffect(() => {
-    socketRef.current = io.connect('https://server-zw.herokuapp.com/');
+    socketRef.current = io.connect('http://localhost:8000');
     navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
+      .getUserMedia({ video: false, audio: true })
       .then((stream) => {
         userVideo.current.srcObject = stream;
         socketRef.current.emit('join room', roomID);
         socketRef.current.on('all users', (users) => {
+          console.log('users', users)
           const peers = [];
+          console.log('my peer', users)
           users.forEach((userID) => {
             const peer = createPeer(userID, socketRef.current.id, stream);
+            console.log('my peer', peer)
             peersRef.current.push({
               peerID: userID,
               peer,
