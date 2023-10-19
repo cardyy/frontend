@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "homepage": "https://cardyy.github.io/frontend",
+  "homepage": ".",
   "private": true,
   "engines": {
     "node": "16.x"
