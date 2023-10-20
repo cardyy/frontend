@@ -22,6 +22,7 @@ export default function Game_component() {
     numPlayers,
     activePlayer,
     activePlayers,
+    myID,
     centerDeck,
     deck,
     setMessage,
@@ -51,6 +52,7 @@ export default function Game_component() {
           activePlayer={activePlayer}
           roomID={roomId}
           activePlayers={activePlayers}
+          id={myID}
         />
         {gameData.gameOver === 'yes' && (
           <GameOver

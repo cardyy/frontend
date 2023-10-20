@@ -1,7 +1,17 @@
 import React from 'react';
 import './deck.css';
+import deck from '../../../assets/audio/deck.mp3';
+import shuffle from '../../../assets/audio/shuffle.mp3';
 
 export default function Deck_component(props) {
+  function playAudio(x) {
+    if(x=='deck'){
+      new Audio(deck).play();
+    } else if(x=='shuffle'){
+      new Audio(shuffle).play();
+    }
+    
+  }
   function handleClick() {
     const id = localStorage.getItem('myId');
     const roomId = localStorage.getItem('roomId');
@@ -14,8 +24,10 @@ export default function Deck_component(props) {
       return item.id === id;
     });
     if (gameData.gameOver === 'no') {
+      playAudio('deck');
       if (gameData.mainDeck.length === 0) {
         props.message('There are no more cards in the deck..Shuffled');
+        playAudio('shuffle');
         setTimeout(() => {
           props.message(null);
         }, 3000);

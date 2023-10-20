@@ -4,14 +4,12 @@ import io from 'socket.io-client';
 
 const Video = (props) => {
   const ref = useRef();
-
   useEffect(() => {
     props.peer.on('stream', (stream) => {
       ref.current.srcObject = stream;
       ref.current.play().catch(console.error); // Handling the case where autoplay was prevented.
     });
   }, [props.peer]);
-  
   return (
     <video playsInline ref={ref} autoPlay className='avators av-top' id={`${props.pos}`} />
   );
@@ -43,7 +41,7 @@ const Players_component = (props) => {
       document.getElementById(`${i}${i}`).style.top =
         document.getElementById(`${i}`).offsetTop + 'px';
     }
-  }, []);
+  }, [peers.length, props.activePlayers.length]);
 
   useEffect(() => {
     socketRef.current = io.connect('https://crazy-eights-f5fce4747505.herokuapp.com');
@@ -53,12 +51,9 @@ const Players_component = (props) => {
         userVideo.current.srcObject = stream;
         socketRef.current.emit('join room', roomID);
         socketRef.current.on('all users', (users) => {
-          console.log('users', users)
           const peers = [];
-          console.log('my peer', users)
           users.forEach((userID) => {
             const peer = createPeer(userID, socketRef.current.id, stream);
-            console.log('my peer', peer)
             peersRef.current.push({
               peerID: userID,
               peer,
@@ -164,7 +159,7 @@ const Players_component = (props) => {
           );
         })}
       {props.activePlayers.map((playerId, index) => (
-        <div className={`av-bot glow`} id={`${index}${index}`} key={index} />
+        <div className={`${glow(playerId)} av-bot`} id={`${index}${index}`} key={index} />
       ))}
     </div>
   );

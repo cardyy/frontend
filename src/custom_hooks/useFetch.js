@@ -1,4 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import nhonga from '../assets/audio/nhonga.mp3';
+import skip from '../assets/audio/skip.mp3';
+import deal from '../assets/audio/deal.mp3';
 import io from 'socket.io-client';
 
 export default function UseFetch() {
@@ -19,16 +22,32 @@ export default function UseFetch() {
   const [deck, setDeck] = useState(0);
   const [next, setNext] = useState(false);
   const [hadDeclared, setHadDeclared] = useState(false);
+  const [lastNhongaPlayer, setLastNhongaPlayer] = useState(
+    () => window.localStorage.getItem('lastNhongaPlayer') || null
+  );
+
 
   const socketRef = useRef();
+
+  function playAudio(x) {
+    if(x=='nhonga'){
+      new Audio(nhonga).play();
+    } else if(x=='skip'){
+      new Audio(skip).play();
+    } else if(x=='deal'){
+      new Audio(deal).play();
+    }
+    
+  }
 
   const createRoom = (num_players, game_type) => {
     const id = Math.random().toString(36).substr(2, 4);
     const room = game_type + id;
+    const username = localStorage.getItem('game_name');
     if (myID) return;
     localStorage.setItem('myId', id);
     localStorage.setItem('roomId', room);
-    socketRef.current.emit('create_game', { room, id, num_players });
+    socketRef.current.emit('create_game', { room, id, username, num_players });
     setClickEvent((x) => {
       return !x;
     });
@@ -37,9 +56,10 @@ export default function UseFetch() {
   const joinRoom = (x) => {
     const id = Math.random().toString(36).substr(2, 4);
     const room = x;
+    const username = localStorage.getItem('game_name');
     if (myID) return;
     let myPromise = new Promise((myResolve) => {
-      socketRef.current.emit('join_game', { room, id });
+      socketRef.current.emit('join_game', { room, id ,username});
       myResolve();
     });
 
@@ -74,7 +94,9 @@ export default function UseFetch() {
     const room = localStorage.getItem('roomId');
     setRoomId(room);
     setmyID(id);
-    !gameStarted && setMessage('Waiting for other players to join...');
+    if(!gameStarted){
+      setMessage('Waiting for other players to join...');
+    }
     socketRef.current.emit('server_connect', roomId);
     socketRef.current.on('rest-of-world', (rest_of_world) => {
       setRest(rest_of_world);
@@ -93,12 +115,22 @@ export default function UseFetch() {
       ) {
         localStorage.clear();
       } else {
-        data.players.length > 0 ? setGameStarted(true) : setGameStarted(false);
+        if(data.players.length > 0) {
+          playAudio('block');
+          setGameStarted(true)
+        }else {
+          setGameStarted(false);
+        }   
         const myPersonalData = data.players.find(
           (player) => player.id === myID
         );
         if (myPersonalData) {
           if (myPersonalData.nhonga !== 0) {
+            const testA = window.localStorage.getItem('lastNhongaPlayer');
+            if (data.activePlayer !== testA) {
+              window.localStorage.setItem('lastNhongaPlayer', data.activePlayer);
+              playAudio('nhonga');
+          }  
             setMessage(
               `You have just been told to pick ${myPersonalData.nhonga}! You need to counter or pick`
             );
@@ -108,6 +140,7 @@ export default function UseFetch() {
           }
           let myVar;
           if (myPersonalData.skip === 'yes') {
+            playAudio('skip');
             setMessage('You have just been skipped you have 3 sec to counter');
             setTimeout(() => {
               setMessage(null);
@@ -124,6 +157,7 @@ export default function UseFetch() {
         }
 
         setActivePlayer(data.activePlayer);
+        
         setActivePlayers(
           data.players.map((x) => {
             return x.id;

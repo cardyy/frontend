@@ -1,8 +1,31 @@
 import React from 'react';
+import play from '../../../assets/audio/play.mp3'
+import stop from '../../../assets/audio/stop.mp3';
+import win from '../../../assets/audio/win.mp3';
+import nhongesa from '../../../assets/audio/nhonga.mp3';
+import block from '../../../assets/audio/block.mp3';
+import declare from '../../../assets/audio/declare.mp3'
 import './cards_component.css';
 
 export default function Cards_component(props) {
+  function playAudio(x) {
+    if(x=='play'){
+      new Audio(play).play();
+    } else if(x== 'stop'){
+      new Audio(stop).play();
+    } else if(x== 'win'){
+      new Audio(win).play();
+    } else if(x== 'nhongesa'){
+      new Audio(nhongesa).play();
+    }  else if(x== 'block'){
+      new Audio(block).play();
+    } else if(x== 'declare'){
+      new Audio(declare).play();
+    }
+    
+  }
   const handleClick = (a) => {
+    
     const id = localStorage.getItem('myId');
     const roomId = localStorage.getItem('roomId');
     const gameData = props.data;
@@ -69,7 +92,7 @@ export default function Cards_component(props) {
             (myCard1 === 'A' && topCard1 === '0')
           ) {
             props.next(false);
-
+            playAudio('block');
             props.socket.current.emit('block', c);
           }
         }
@@ -87,6 +110,7 @@ export default function Cards_component(props) {
           props.setHadDeclared(true);
           props.next(false);
           props.message('Which design do you want?');
+          playAudio('declare');
           props.socket.current.emit('play', b);
         }
 
@@ -102,7 +126,7 @@ export default function Cards_component(props) {
           if (check === true && ds === 1 && ck !== true) {
             props.next(false);
             props.socket.current.emit('play', c);
-
+            playAudio('win');
             setTimeout(() => {
               props.socket.current.emit('gameOver', credentials);
             }, 2400);
@@ -111,7 +135,7 @@ export default function Cards_component(props) {
             (myCard1 === '2' && skip === 'no' && cant === 'yes')
           ) {
             props.next(false);
-
+           playAudio('play');
             props.socket.current.emit('nhongesa', c);
           } else if (myCard1 === 'K' && skip === 'no' && nhonga === 0) {
             props.next(true);
@@ -130,7 +154,7 @@ export default function Cards_component(props) {
             howMany !== 2
           ) {
             props.next(false);
-
+            playAudio('play');
             props.socket.current.emit('reverse', c);
           } else if (
             myCard1 === 'J' &&
@@ -139,7 +163,7 @@ export default function Cards_component(props) {
             howMany === 2
           ) {
             props.next(false);
-
+            playAudio('play');
             props.socket.current.emit('play', b);
           } else if (
             myCard1 === '7' &&
@@ -148,7 +172,7 @@ export default function Cards_component(props) {
             howMany === 2
           ) {
             props.next(false);
-
+            playAudio('play');
             props.socket.current.emit('play', b);
           } else if (
             myCard1 === '7' &&
@@ -156,6 +180,7 @@ export default function Cards_component(props) {
             nhonga === 0 &&
             howMany !== 2
           ) {
+            playAudio('play');
             props.next(false);
             props.socket.current.emit('play', c);
           } else if (
@@ -164,6 +189,7 @@ export default function Cards_component(props) {
             nhonga === 0 &&
             howMany !== 2
           ) {
+            playAudio('play');
             props.next(false);
             props.socket.current.emit('skip', c);
           } else if (
@@ -172,17 +198,20 @@ export default function Cards_component(props) {
             myCard1 !== '0' &&
             myCard1 !== '2'
           ) {
+            playAudio('play');
             props.next(false);
             props.socket.current.emit('play', c);
           }
         } else {
           props.message('Not a matching suit!');
+          playAudio('stop');
           setTimeout(() => {
             props.message(null);
           }, 1000);
         }
       } else {
         props.message('Chimbomira! its not your turn yet...');
+        playAudio('stop');
         setTimeout(() => {
           props.message(null);
         }, 1000);
