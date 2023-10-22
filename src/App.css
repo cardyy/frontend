@@ -134,7 +134,21 @@ span h4 {
   height: 7rem;
   width: 7rem;
   border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.35);
 }
+
+.av-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* And this will center them vertically */
+}
+
+h4 {
+  color: whitesmoke;
+  margin-left: 1em;
+  margin-top: -0.05em;
+}
+
 @media all and (max-width: 30em) {
   button {
     display: block;
