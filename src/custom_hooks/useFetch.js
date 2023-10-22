@@ -23,10 +23,6 @@ export default function UseFetch() {
   const [deck, setDeck] = useState(0);
   const [next, setNext] = useState(false);
   const [hadDeclared, setHadDeclared] = useState(false);
-  const [lastNhongaPlayer, setLastNhongaPlayer] = useState(
-    () => window.localStorage.getItem('lastNhongaPlayer') || null
-  );
-
 
   const socketRef = useRef();
 
