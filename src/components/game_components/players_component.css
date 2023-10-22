@@ -6,7 +6,7 @@
 }
 
 .avatars {
-    border-radius: 50%; /* To ensure the video is circular, if it isn't already */
+    border-radius: 50%; 
 }
 
 .player-info {
@@ -20,5 +20,21 @@
     color: aliceblue;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* This will ensure long usernames are truncated with '...' */
+    text-overflow: ellipsis; 
 }
+
+.player-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: start;
+    gap: 10px; 
+    width: 300px;
+  }
+
+  .player-audio {
+    margin-left: -1.2em;
+    margin-top: 3em;
+  }
+  
+  
