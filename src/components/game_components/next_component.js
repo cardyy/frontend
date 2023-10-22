@@ -1,5 +1,5 @@
 import React from 'react';
-import nextSound from '../../assets/audio/next.m4a';
+import nextSound from '../../assets/audio/next.mp3';
 import nextImage from '../../assets/next.png';
 import { Howl } from 'howler';
 

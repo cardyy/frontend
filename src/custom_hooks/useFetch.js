@@ -9,6 +9,7 @@ export default function UseFetch() {
   const [myID, setmyID] = useState(null);
   const [gameData, setGameData] = useState([]);
   const [activePlayers, setActivePlayers] = useState([]);
+  const [players, setPlayers] = useState([]);
   const [rest, setRest] = useState([]);
   const [numPlayers, setNumPlayers] = useState(0);
   const [activePlayer, setActivePlayer] = useState('');
@@ -43,7 +44,7 @@ export default function UseFetch() {
   const createRoom = (num_players, game_type) => {
     const id = Math.random().toString(36).substr(2, 4);
     const room = game_type + id;
-    const username = localStorage.getItem('game_name');
+    const username = id;
     if (myID) return;
     localStorage.setItem('myId', id);
     localStorage.setItem('roomId', room);
@@ -56,7 +57,7 @@ export default function UseFetch() {
   const joinRoom = (x) => {
     const id = Math.random().toString(36).substr(2, 4);
     const room = x;
-    const username = localStorage.getItem('game_name');
+    const username = id;
     if (myID) return;
     let myPromise = new Promise((myResolve) => {
       socketRef.current.emit('join_game', { room, id ,username});
@@ -163,6 +164,7 @@ export default function UseFetch() {
             return x.id;
           })
         );
+        setPlayers(data.players);
         setCenterDeck(data.centerDeck);
         setHasData(data.length !== 0);
         setDeck(data.mainDeck.length);
@@ -184,6 +186,7 @@ export default function UseFetch() {
     leaveRoom,
     myHand,
     activePlayers,
+    players,
     activePlayer,
     numPlayers,
     centerDeck,
