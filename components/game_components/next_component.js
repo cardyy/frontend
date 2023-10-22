@@ -3,16 +3,31 @@ import nextSound from '../../assets/audio/next.m4a';
 import nextImage from '../../assets/next.png';  // Consider importing the image for better error handling.
 
 export default function Next_component({socket, next, setClickEvent}) {  // Destructuring for cleaner reference
-  async function playAudio() {  // Using async/await syntax for cleaner reads
-    const audio = new Audio(nextSound);
-    try {
-      await audio.play();
-      // Automatic playback started!
-    } catch (error) {
-      // Auto-play was prevented, or there were some other issues.
-      console.error("Playback failed.", error);
+
+  // At the top of your file
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioContext = new AudioContext();
+
+// When playing the audio
+async function playAudio() {
+  try {
+    // Check if context is in suspended state (autoplay policy)
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume();
     }
+    const audio = new Audio(nextSound);
+    audio.src = nextSound;  // Ensure the source is set correctly.
+    audio.load();  // Sometimes necessary to reload the source.
+    
+    // Now, we're ensuring the audio plays via the audio context
+    const track = audioContext.createMediaElementSource(audio);
+    track.connect(audioContext.destination);
+
+    await audio.play();  // Play the audio.
+  } catch (err) {
+    console.error('Failed to play:', err);
   }
+}
 
   const nextAction = async () => {  // Reflecting the async nature of the actions here
     const room = localStorage.getItem('roomId');
