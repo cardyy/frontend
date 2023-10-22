@@ -7,10 +7,15 @@ const Players_component = (props) => {
     }
   };
 
+  console.log('props.activePlayers',props.activePlayers)
+
   return (
     <div >
-      {props.activePlayers.map((playerId, index) => (
-        <div className={`${glow(playerId)} av-bot`} id={`${index}${index}`} key={index} />
+      {props.activePlayers.map(player => (
+        <div key={player.id} className="av-container">
+          <div className={`${glow(player.id)} av-bot`} id={`player-${player.id}`} /> 
+          <h4>{player.username}</h4> {}
+        </div>
       ))}
     </div>
   );
