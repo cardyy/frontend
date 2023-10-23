@@ -58,13 +58,11 @@ const PlayerAudioComponent = ({ roomID, playerId, id }) => {
       });
 
       socketRef.current.on("user left", (id) => {
-        const peerObj = peersRef.current.find((p) => p.peerID === id);
-        if (peerObj) {
-          peerObj.peer.destroy();
-        }
-        const peers = peersRef.current.filter((p) => p.peerID !== id);
-        peersRef.current = peers;
-        setPeers(peers);
+        setPeers((prevPeers) => {
+          const updatedPeers = new Map(prevPeers);
+          updatedPeers.delete(id);
+          return updatedPeers;
+        });
       });
 
       const audioTracks = stream.getAudioTracks();
@@ -111,12 +109,14 @@ const PlayerAudioComponent = ({ roomID, playerId, id }) => {
 
     // Cleanup
     return () => {
+      socketRef.current.disconnect();
       peersRef.current.forEach(({ peer }) => peer.destroy());
       if (socketRef.current) {
         socketRef.current.close();
       }
     };
-  }, []);
+  }, [roomID]);
+  
 
   const handleMuteToggle = () => {
     setUserAudioEnabled((prevEnabled) => {
@@ -140,7 +140,7 @@ const PlayerAudioComponent = ({ roomID, playerId, id }) => {
   return (
     <>
       <div className="player-audio">
-        <audio ref={audioRef} autoPlay playsInline></audio>
+      <audio ref={audioRef} autoPlay playsInline muted/>
         <button
           onClick={handleMuteToggle}
           style={{
@@ -159,11 +159,12 @@ const PlayerAudioComponent = ({ roomID, playerId, id }) => {
         </button>
       </div>
       {peers.map((peer, index) => {
-        return <Audio key={index} peer={peer} isMuted={isMuted} />;
+        return <Audio key={index} peer={peer} />;
       })}
     </>
   );
 };
+
 
 const Audio = ({ peer, isMuted }) => {
   const ref = useRef();
@@ -176,7 +177,7 @@ const Audio = ({ peer, isMuted }) => {
   }, [peer, isMuted]); // Make sure to react to changes of isMuted.
 
   // Adjust audio element based on mute state.
-  return <audio playsInline autoPlay ref={ref} muted={isMuted} />;
+  return <audio playsInline autoPlay ref={ref} />;
 };
 
 export default PlayerAudioComponent;
