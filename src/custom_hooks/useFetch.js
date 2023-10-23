@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import nhonga from '../assets/audio/nhonga.mp3';
 import skip from '../assets/audio/skip.mp3';
 import deal from '../assets/audio/deal.mp3';
+import block from '../assets/audio/block.mp3'
 import io from 'socket.io-client';
 
 export default function UseFetch() {
@@ -26,16 +27,24 @@ export default function UseFetch() {
 
   const socketRef = useRef();
 
-  function playAudio(x) {
-    if(x=='nhonga'){
-      new Audio(nhonga).play();
-    } else if(x=='skip'){
-      new Audio(skip).play();
-    } else if(x=='deal'){
-      new Audio(deal).play();
+  function playAudio(soundKey) {
+    const sounds = {
+      nhonga: nhonga, 
+      skip: skip,     
+      deal: deal,
+      block: block,    
+    };
+  
+    const soundToPlay = sounds[soundKey];
+    console.log(soundToPlay)
+
+    if (soundToPlay) {
+      new Audio(soundToPlay).play();
+    } else {
+      console.error(`No sound found for key: "${soundKey}"`);
     }
-    
   }
+  
 
   const createRoom = (num_players, game_type) => {
     const id = Math.random().toString(36).substr(2, 4);
@@ -113,7 +122,6 @@ export default function UseFetch() {
         localStorage.clear();
       } else {
         if(data.players.length > 0) {
-          playAudio('block');
           setGameStarted(true)
         }else {
           setGameStarted(false);
@@ -168,9 +176,10 @@ export default function UseFetch() {
         setNumPlayers(data.playersAllowed);
       }
     });
+    
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(gameData), clickEvent, roomId]);
+  }, [gameData.id, clickEvent, roomId]);
 
   return {
     hasData,

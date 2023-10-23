@@ -1,0 +1,55 @@
+.nav-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50rem;
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .small {
+    width: 10rem;
+  }
+
+  .nav-bar .small button {
+    background-color: red; /* Set the button background color */
+    color: white; /* Set the text color of the button */
+    border: none; /* Optional: remove the border */
+    cursor: pointer; /* Change cursor on hover */
+    outline: none; /* Optional: remove the outline */
+  }
+  
+  .nav-bar .small button:hover {
+    /* Optional: Add hover effects */
+    background-color: red; /* Darken the button slightly on hover */
+  }
+  
+  /* Media Query for Mobile Devices */
+  @media (max-width: 768px) {
+    .nav-bar {
+      width: 100%; /* Make the navbar extend fully to the screen width */
+      height: auto; /* Adjust height automatically */
+      flex-direction: row; /* Keep items in a horizontal line */
+      flex-wrap: wrap; /* Allow items to wrap onto the next line if there isn't enough room */
+      justify-content: space-around; /* Distribute navbar items evenly, including the space around them */
+      align-items: center; /* Keep items vertically centered */
+      margin-top: 0.5em;
+    }
+  
+    .nav-bar span, .nav-bar .small {
+      flex: 1; /* Allow items to grow and shrink as necessary so they share space */
+      text-align: center; /* Center the text within the spans and divs */
+      margin-left: 0.51rem; /* Add some margin around items for better visual separation */
+      color: whitesmoke;
+    }
+  
+    .small {
+      /* Other styling as needed, remove fixed width to allow it to adjust within flexbox */
+      width: auto;
+    }
+
+  }
+  

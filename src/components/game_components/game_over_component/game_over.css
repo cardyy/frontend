@@ -40,6 +40,10 @@
   margin-left: 25%;
   z-index: 3;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
   border-radius: 40px;
   -webkit-animation-name: animacao1;
   -webkit-animation-duration: 1s;
@@ -63,7 +67,6 @@
 .gameover {
   width: 750px;
   height: auto;
-  padding-top: 60px;
   background: none;
 }
 
@@ -278,4 +281,18 @@ button {
   letter-spacing: 12px;
   color: #fff;
   left: 15%;
+}
+
+@media (max-width: 767px) {
+  #tudo {
+    width: 90%;
+    margin-left: 15%;
+  }
+  .gameover p, .continue p {
+    font-size: 50px;
+  }
+  .opcoes {
+    flex-direction: column;
+  }
+ 
 }
