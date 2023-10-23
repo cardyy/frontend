@@ -15,7 +15,7 @@ const Players_component = (props) => {
         <div key={player.id} className="av-container">
           <div className='player-container'>
           <div className={`${glow(player.id)} av-bot`} id={`player-${player.id}`} /> 
-          <PlayerAudioComponent playerId={player.id} roomID={props.roomID} id={props.id}/>
+          {player.id === props.id && (<PlayerAudioComponent roomID={props.roomID}/>)}
           </div>
           <h4>{player.username}: {player.playerHand.length} cards</h4> {}
         </div>

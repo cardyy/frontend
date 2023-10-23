@@ -7,7 +7,7 @@ import {
   faMicrophoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
 
-const PlayerAudioComponent = ({ roomID, playerId, id }) => {
+const PlayerAudioComponent = ({ roomID }) => {
   // Assuming you want to use a room-based system
   const [isMuted, setIsMuted] = useState(false);
   const [peers, setPeers] = useState([]);
@@ -76,7 +76,7 @@ const PlayerAudioComponent = ({ roomID, playerId, id }) => {
         initiator: true,
         trickle: false,
         stream,
-        config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] }
+        config: { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] },
       });
 
       peer.on("signal", (signal) => {
@@ -95,7 +95,7 @@ const PlayerAudioComponent = ({ roomID, playerId, id }) => {
         initiator: false,
         trickle: false,
         stream,
-        config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] }
+        config: { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] },
       });
 
       peer.on("signal", (signal) => {
@@ -116,7 +116,6 @@ const PlayerAudioComponent = ({ roomID, playerId, id }) => {
       }
     };
   }, [roomID]);
-  
 
   const handleMuteToggle = () => {
     setUserAudioEnabled((prevEnabled) => {
@@ -139,32 +138,33 @@ const PlayerAudioComponent = ({ roomID, playerId, id }) => {
 
   return (
     <>
-      <div className="player-audio">
-      <audio ref={audioRef} autoPlay playsInline muted/>
-        <button
-          onClick={handleMuteToggle}
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: "10px",
-            color: "white",
-          }}
-        >
-          {isMuted ? (
-            <FontAwesomeIcon icon={faMicrophoneSlash} size="2x" />
-          ) : (
-            <FontAwesomeIcon icon={faMicrophone} size="2x" />
-          )}
-        </button>
-      </div>
+      
+        <div className="player-audio">
+          <audio ref={audioRef} autoPlay playsInline muted />
+          <button
+            onClick={handleMuteToggle}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "10px",
+              color: "white",
+            }}
+          >
+            {isMuted ? (
+              <FontAwesomeIcon icon={faMicrophoneSlash} size="2x" />
+            ) : (
+              <FontAwesomeIcon icon={faMicrophone} size="2x" />
+            )}
+          </button>
+        </div>
+     
       {peers.map((peer, index) => {
         return <Audio key={index} peer={peer} />;
       })}
     </>
   );
 };
-
 
 const Audio = ({ peer, isMuted }) => {
   const ref = useRef();
