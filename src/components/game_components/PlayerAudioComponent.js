@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import Peer from "simple-peer"; // A simple library to work with WebRTC.
 import io from "socket.io-client"; // Real-time library
@@ -7,7 +8,7 @@ import {
   faMicrophoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
 
-const PlayerAudioComponent = ({ roomID }) => {
+const PlayerAudioComponent = ({ roomID,numPlayers }) => {
   // Assuming you want to use a room-based system
   const [isMuted, setIsMuted] = useState(false);
   const [peers, setPeers] = useState([]);
@@ -115,7 +116,7 @@ const PlayerAudioComponent = ({ roomID }) => {
         socketRef.current.close();
       }
     };
-  }, [roomID]);
+  }, [numPlayers]);
 
   const handleMuteToggle = () => {
     setUserAudioEnabled((prevEnabled) => {
