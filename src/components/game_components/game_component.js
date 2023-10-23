@@ -61,13 +61,14 @@ export default function Game_component() {
             GameOver={gameData.gameOver}
           />
         )}
-        <CenterCards centerCards={centerDeck} />
+        <CenterCards centerCards={centerDeck}/>
         <Deck
           message={setMessage}
           data={gameData}
           socket={socketRef}
           next={setNext}
           setClickEvent={setClickEvent}
+          activePlayers={activePlayers.length}
         />
         <Cards
           myHand={myHand}
@@ -77,6 +78,7 @@ export default function Game_component() {
           next={setNext}
           setHadDeclared={setHadDeclared}
           setClickEvent={setClickEvent}
+          activePlayers={activePlayers.length}
         />
         <DeclaredSuite declare={gameData.declare} />
         {hadDeclared && (

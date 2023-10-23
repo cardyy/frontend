@@ -24,7 +24,15 @@ export default function Deck_component(props) {
       return item.id === id;
     });
     if (gameData.gameOver === 'no') {
+      if(props.activePlayers < 2){
+        
+        props.message(
+          'Waiter for other players to join...'
+        );
+        return
+      }
       playAudio('deck');
+      
       if (gameData.mainDeck.length === 0) {
         props.message('There are no more cards in the deck..Shuffled');
         playAudio('shuffle');

@@ -85,6 +85,13 @@ export default function Cards_component(props) {
     let check = badCards.includes(myCard1);
     let ck = amwe.includes(topCard1);
     if (gameOver === 'no') {
+      if(props.activePlayers < 2){
+        
+        props.message(
+          'Waiter for other players to join...'
+        );
+        return
+      }
       if (activePlayer === id) {
         if (cant === 'yes' && nhonga > 0) {
           if (

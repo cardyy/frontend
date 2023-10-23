@@ -8,10 +8,10 @@ export default function GameOver(props) {
     localStorage.removeItem('button_action');
   };
   return (
-    <div id='tudo'>
-      <div class='gameover'>
-        <p> GAME </p>
-        <p> OVER </p>
+    <div id="tudo">
+      <div className="gameover">
+        <p>GAME</p>
+        <p>OVER</p>
       </div>
 
       {props.GameOver === 'yes' && props.show_gameOver_buttons === false && (
@@ -22,28 +22,27 @@ export default function GameOver(props) {
           <div class='shadow'></div>
           <div class='shadow'></div>
           <div class='shadow'></div>
-          <span>Loading</span>
         </div>
       )}
-      {props.GameOver === 'yes' && props.show_gameOver_buttons === true && (
-        <>
-          {' '}
-          <div class='continue'>
-            <p> CONTINUE? </p>
+
+     {props.GameOver === 'yes' && props.show_gameOver_buttons === true && (
+        <div className="continue-section">
+          <div className="continue">
+            <p>CONTINUE?</p>
           </div>
-          <div class='opcoes'>
-            <div class='yes'>
-              <button className='glow-on-hover' onClick={handleButtonClick}>
+          <div className="opcoes">
+            <div className="yes">
+              <button className="glow-on-hover" onClick={handleButtonClick}>
                 Yes
               </button>
             </div>
-            <div class='no'>
-              <button className='glow-on-hover' onClick={handleButtonClick}>
+            <div className="no">
+              <button className="glow-on-hover" onClick={handleButtonClick}>
                 No
               </button>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

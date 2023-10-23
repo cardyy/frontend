@@ -35,16 +35,22 @@
 }
 
 #tudo {
-  width: 50%;
-  height: 580px;
-  margin-left: 25%;
   z-index: 3;
   position: absolute;
+  top: 50%; /* positioning at the center of the parent */
+  left: 50%; /* positioning at the center of the parent */
+  transform: translate(-50%, -50%); /* adjust for the element's own width and height */
+  border-radius: 40px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center; 
-  border-radius: 40px;
+  text-align: center;
+  width: 100%;
+  max-width: 800px; /* Limiting the maximum width for large screens */
+  height: auto;
+  margin: 0 auto; /* Centralizing horizontally */
+  padding: 20px; 
   -webkit-animation-name: animacao1;
   -webkit-animation-duration: 1s;
   -webkit-animation-timing-function: linear;
@@ -64,8 +70,30 @@
   animation-direction: alternate;
 }
 
+
+.gameover, .continue, .opcoes {
+  width: 100%; 
+}
+
+/* Adjusting for smaller screens */
+@media (max-width: 767px) {
+  #tudo {
+    padding: 10px; /* Less padding on smaller devices */
+  }
+  .gameover p, .continue p {
+    font-size: 30px; /* Smaller font size for mobile readability */
+    line-height: 1.2; /* Adjusting line height for readability */
+  }
+  .opcoes {
+    flex-direction: column; /* Stack buttons vertically on small screens */
+    gap: 10px; /* Space between stacked items */
+  }
+  .yes button, .no button {
+    width: 100%; /* Make buttons expand full-width */
+  }
+}
+
 .gameover {
-  width: 750px;
   height: auto;
   background: none;
 }
@@ -82,7 +110,6 @@
 }
 
 .continue {
-  width: 750px;
   height: auto;
   padding-top: 40px;
 }
@@ -99,7 +126,6 @@
 }
 
 .opcoes {
-  width: 550px;
   height: auto;
   padding-top: 50px;
   margin: auto;
