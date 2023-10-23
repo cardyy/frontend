@@ -82,9 +82,10 @@ const PlayerAudioComponent = ({ roomID,numPlayers }) => {
 
       peer.on("signal", (signal) => {
         socketRef.current.emit("sending signal", {
-          userToSignal,
-          callerID,
-          signal,
+          userToSignal,  // the ID of the user to signal
+          callerID,      // the caller's own ID
+          signal,        // the signal data
+          roomID,        // the room context (this is missing in your current implementation)
         });
       });
 
@@ -100,7 +101,11 @@ const PlayerAudioComponent = ({ roomID,numPlayers }) => {
       });
 
       peer.on("signal", (signal) => {
-        socketRef.current.emit("returning signal", { signal, callerID });
+        socketRef.current.emit("returning signal", {
+          signal,   // the signal data
+          callerID, // the caller's own ID (in this context, the 'caller' is the other peer)
+          roomID,   // again, the room context is necessary
+        });
       });
 
       peer.signal(incomingSignal);
