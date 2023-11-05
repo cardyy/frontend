@@ -318,7 +318,7 @@ button {
 @media (max-width: 767px) {
   #tudo {
     width: 90%;
-    margin-left: 15%;
+    margin-left: 1%;
   }
   .gameover p,
   .continue p {
@@ -328,3 +328,5 @@ button {
     flex-direction: column;
   }
 }
+
+
