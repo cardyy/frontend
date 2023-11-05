@@ -64,7 +64,9 @@ video {
   top: 63%;
   width: 8rem;
   height: 4rem;
-  transition: width 2s, height 2s;
+  transition:
+    width 2s,
+    height 2s;
   cursor: pointer;
 }
 .next:hover {
@@ -76,6 +78,11 @@ video {
 .room-message {
   display: table;
   margin: 18rem auto;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
 }
 
 span {
@@ -230,4 +237,3 @@ p {
     background-position: 0 0;
   }
 }
-
