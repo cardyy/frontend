@@ -179,8 +179,7 @@
 
 .no-games-notification {
   color: whitesmoke;
-  margin-top: 4em;      /* Vertically centers the content */
-  flex-direction: column;   /* Stacks children elements vertically */
-  height: 100%;             /* Full height of the container */
+  margin-top: 4em; /* Vertically centers the content */
+  flex-direction: column; /* Stacks children elements vertically */
+  height: 100%; /* Full height of the container */
 }
-

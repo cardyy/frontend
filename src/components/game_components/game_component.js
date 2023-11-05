@@ -1,15 +1,15 @@
-import React from 'react';
-import Players from './players_component';
-import Cards from './cards_component/cards_component';
-import CenterCards from './center_cards_component/center_cards_component';
-import Deck from './deck_component/deck_component';
-import Next from './next_component';
-import NavBar from './nav_bar';
-import Declare from './declare/declare';
-import DeclaredSuite from './declare/declared_suit';
-import UseFetch from '../../custom_hooks/useFetch';
-import LandingPage from './landing_page/landing_page_component';
-import GameOver from './game_over_component/game_over.component';
+import React from 'react'
+import Players from './players_component'
+import Cards from './cards_component/cards_component'
+import CenterCards from './center_cards_component/center_cards_component'
+import Deck from './deck_component/deck_component'
+import Next from './next_component'
+import NavBar from './nav_bar'
+import Declare from './declare/declare'
+import DeclaredSuite from './declare/declared_suit'
+import UseFetch from '../../custom_hooks/useFetch'
+import LandingPage from './landing_page/landing_page_component'
+import GameOver from './game_over_component/game_over.component'
 
 export default function Game_component() {
   const {
@@ -37,11 +37,11 @@ export default function Game_component() {
     setHadDeclared,
     setClickEvent,
     show_gameOver_buttons,
-  } = UseFetch();
+  } = UseFetch()
 
   if (roomId && hasData) {
     return (
-      <div className='bg'>
+      <div className="bg">
         <NavBar
           leaveRoom={leaveRoom}
           deck={deck}
@@ -61,7 +61,7 @@ export default function Game_component() {
             GameOver={gameData.gameOver}
           />
         )}
-        <CenterCards centerCards={centerDeck}/>
+        <CenterCards centerCards={centerDeck} />
         <Deck
           message={setMessage}
           data={gameData}
@@ -79,6 +79,7 @@ export default function Game_component() {
           setHadDeclared={setHadDeclared}
           setClickEvent={setClickEvent}
           activePlayers={activePlayers.length}
+          numPlayers={numPlayers}
         />
         <DeclaredSuite declare={gameData.declare} />
         {hadDeclared && (
@@ -97,12 +98,12 @@ export default function Game_component() {
             setClickEvent={setClickEvent}
           />
         )}
-        <span className='room-message'>{message}</span>
+        <span className="room-message">{message}</span>
       </div>
-    );
+    )
   } else {
     return (
-      <div className='home'>
+      <div className="home">
         <LandingPage
           joinRoom={joinRoom}
           createRoom={createRoom}
@@ -110,6 +111,6 @@ export default function Game_component() {
           socket={rest}
         />
       </div>
-    );
+    )
   }
 }

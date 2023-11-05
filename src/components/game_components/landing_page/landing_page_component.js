@@ -1,70 +1,71 @@
-import React, { useState, useEffect } from "react";
-import "./landing_page.css";
+import React, { useState, useEffect } from 'react'
+import './landing_page.css'
+import Leaderboard from '../LeaderBoard/LeaderBoard'
 
 export default function LandingPage(props) {
-  const [game_type, setGame_type] = useState(null);
-  const [button_action, setButton_action] = useState(null);
-  const [clickEvent, setClickEvent] = useState(false);
-  const [input, setInput] = useState("");
-  const [data, setData] = useState([]);
-  
-  useEffect(() => {
-    const type = localStorage.getItem("game_type");
-    const action = localStorage.getItem("button_action");
+  const [game_type, setGame_type] = useState(null)
+  const [button_action, setButton_action] = useState(null)
+  const [clickEvent, setClickEvent] = useState(false)
+  const [input, setInput] = useState('')
+  const [data, setData] = useState([])
 
-    setGame_type(type);
-    setButton_action(action);
+  useEffect(() => {
+    const type = localStorage.getItem('game_type')
+    const action = localStorage.getItem('button_action')
+
+    setGame_type(type)
+    setButton_action(action)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [localStorage.getItem("game_type"), game_type, button_action, clickEvent]);
+  }, [localStorage.getItem('game_type'), game_type, button_action, clickEvent])
 
   useEffect(() => {
-    setData(props.socket);
-  }, [clickEvent, props.socket]);
+    setData(props.socket)
+  }, [clickEvent, props.socket])
 
   const handleClick = (x) => {
-    localStorage.setItem("game_type", x);
-    const action = localStorage.getItem("button_action");
-    if (action === "j" && x === "r")
-      document.getElementById("id01").style.display = "none";
-    setGame_type(x);
-    props.setClickEvent();
+    localStorage.setItem('game_type', x)
+    const action = localStorage.getItem('button_action')
+    if (action === 'j' && x === 'r')
+      document.getElementById('id01').style.display = 'none'
+    setGame_type(x)
+    props.setClickEvent()
     setClickEvent((x) => {
-      return !x;
-    });
-  };
+      return !x
+    })
+  }
 
   const handleClose = () => {
-    localStorage.removeItem("game_type");
-    localStorage.removeItem("button_action");
-    setButton_action(null);
-  };
+    localStorage.removeItem('game_type')
+    localStorage.removeItem('button_action')
+    setButton_action(null)
+  }
 
   const handleButtonClick = (x) => {
-    localStorage.setItem("button_action", x);
+    localStorage.setItem('button_action', x)
     setClickEvent((x) => {
-      return !x;
-    });
-  };
+      return !x
+    })
+  }
 
   const handleJoin = (game) => {
     if (game.players.length === game.playersAllowed) {
       alert(
-        "Sorry the number of required players for this game has been reached",
-      );
-      return;
+        'Sorry the number of required players for this game has been reached'
+      )
+      return
     }
-    props.joinRoom(game.id);
-  };
+    props.joinRoom(game.id)
+  }
 
   const handleJoin2 = (input) => {
-    props.joinRoom(input);
-    setInput("");
-  };
+    props.joinRoom(input)
+    setInput('')
+  }
 
   return (
     <>
-      <img src={require("../../../assets/text.png")} alt="" width="130rem" />
-      {game_type === "r" && button_action === "j" && (
+      <img src={require('../../../assets/text.png')} alt="" width="130rem" />
+      {game_type === 'r' && button_action === 'j' && (
         <div id="id02" className="w3-modal2">
           <div className="w3-modal-content2">
             <span
@@ -77,7 +78,7 @@ export default function LandingPage(props) {
               data.map((game) => (
                 <div className="card-lnading" key={game.id}>
                   <img
-                    src={require("../../../assets/push.png")}
+                    src={require('../../../assets/push.png')}
                     alt=""
                     width="50rem"
                     height="50rem"
@@ -107,19 +108,19 @@ export default function LandingPage(props) {
         <div className="button-container">
           <button
             className="glow-on-hover"
-            onClick={() => handleButtonClick("c")}
+            onClick={() => handleButtonClick('c')}
           >
             Create game
           </button>
           <button
             className="glow-on-hover"
-            onClick={() => handleButtonClick("j")}
+            onClick={() => handleButtonClick('j')}
           >
             Join game
           </button>
         </div>
       )}
-      {game_type !== null && button_action === "c" && (
+      {game_type !== null && button_action === 'c' && (
         <div id="id01" className="w3-modal">
           <div className="w3-modal-content w3-animate-opacity">
             <span
@@ -136,7 +137,7 @@ export default function LandingPage(props) {
                 <div className="num-players">
                   <div onClick={() => props.createRoom(2, game_type)}>
                     <img
-                      src={require("../../../assets/two.png")}
+                      src={require('../../../assets/two.png')}
                       alt=""
                       width="50rem"
                       height="40rem"
@@ -145,7 +146,7 @@ export default function LandingPage(props) {
                   </div>
                   <div onClick={() => props.createRoom(3, game_type)}>
                     <img
-                      src={require("../../../assets/three.png")}
+                      src={require('../../../assets/three.png')}
                       alt=""
                       width="50rem"
                       height="40rem"
@@ -154,7 +155,7 @@ export default function LandingPage(props) {
                   </div>
                   <div onClick={() => props.createRoom(4, game_type)}>
                     <img
-                      src={require("../../../assets/four.png")}
+                      src={require('../../../assets/four.png')}
                       alt=""
                       width="50rem"
                       height="40rem"
@@ -178,10 +179,10 @@ export default function LandingPage(props) {
             </span>
             <div className="w3-container">
               <div>
-                <p className="button-link" onClick={() => handleClick("r")}>
+                <p className="button-link" onClick={() => handleClick('r')}>
                   Play with random people
                 </p>
-                <p onClick={() => handleClick("f")}>
+                <p onClick={() => handleClick('f')}>
                   Play with friends and family
                 </p>
               </div>
@@ -189,7 +190,7 @@ export default function LandingPage(props) {
           </div>
         </div>
       )}
-      {game_type === "f" && button_action === "j" && (
+      {game_type === 'f' && button_action === 'j' && (
         <div id="id01" className="w3-modal">
           <div className="w3-modal-content w3-animate-opacity">
             <span
@@ -219,5 +220,5 @@ export default function LandingPage(props) {
         </div>
       )}
     </>
-  );
+  )
 }

@@ -1,0 +1,57 @@
+.leaderboard-container {
+  margin-top: 1rem;
+  max-height: 400px; /* Adjust based on your requirement */
+  width: 100%;
+  overflow-y: auto;
+  background: #f5f5f5; /* Light background for the container */
+  border-radius: 5px; /* Optional: for rounded corners */
+  padding: 1rem;
+}
+
+.player-entry {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Slight separation between entries */
+  cursor: pointer; /* Change cursor on hover for interactivity */
+}
+
+.player-entry:last-child {
+  border-bottom: none; /* No border for the last element to keep UI clean */
+}
+
+.player-entry:hover {
+  background-color: #e1e1e1; /* Color for hover effect */
+}
+
+.player-avatar img {
+  width: 50px; /* Or desired size */
+  height: 50px; /* Or desired size */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures images of non-uniform sizes look good */
+  margin-right: 10px; /* Space between image and player info */
+}
+
+.player-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Utilizes full space available in the flex container */
+}
+
+.player-rank {
+  font-weight: bold;
+  margin-right: 10px; /* Space between rank and name */
+}
+
+.player-name {
+  flex-grow: 1;
+  color: aqua;
+}
+
+.player-points {
+  font-weight: bold;
+  margin-left: 10px; /* Space between points and the other information */
+}
+
+/* Consider adding responsive designs for different screen sizes. */

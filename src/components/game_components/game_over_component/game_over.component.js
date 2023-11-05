@@ -1,12 +1,12 @@
-import React from 'react';
-import './game_over.css';
+import React from 'react'
+import './game_over.css'
 
 export default function GameOver(props) {
   const handleButtonClick = () => {
-    window.location.reload();
-    localStorage.removeItem('game_type');
-    localStorage.removeItem('button_action');
-  };
+    window.location.reload()
+    localStorage.removeItem('game_type')
+    localStorage.removeItem('button_action')
+  }
   return (
     <div id="tudo">
       <div className="gameover">
@@ -15,17 +15,17 @@ export default function GameOver(props) {
       </div>
 
       {props.GameOver === 'yes' && props.show_gameOver_buttons === false && (
-        <div class='wrapper'>
-          <div class='circle'></div>
-          <div class='circle'></div>
-          <div class='circle'></div>
-          <div class='shadow'></div>
-          <div class='shadow'></div>
-          <div class='shadow'></div>
+        <div class="wrapper">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="shadow"></div>
+          <div class="shadow"></div>
+          <div class="shadow"></div>
         </div>
       )}
 
-     {props.GameOver === 'yes' && props.show_gameOver_buttons === true && (
+      {props.GameOver === 'yes' && props.show_gameOver_buttons === true && (
         <div className="continue-section">
           <div className="continue">
             <p>CONTINUE?</p>
@@ -45,5 +45,5 @@ export default function GameOver(props) {
         </div>
       )}
     </div>
-  );
+  )
 }
