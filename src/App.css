@@ -80,7 +80,8 @@ video {
   margin: 18rem auto;
   position: absolute;
   bottom: 10px;
-  left: 50%;
+  left: 58%;
+  top: 8em;
   transform: translateX(-50%);
   z-index: 1000;
 }
